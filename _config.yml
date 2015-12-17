@@ -7,7 +7,7 @@ title: yield编程实验室
 subtitle: 打怪，升级，收小弟，拓后宫
 description:
 author: yield
-language: zh
+language: zh-Hans
 timezone: Asia/Shanghai
 
 # URL
@@ -57,7 +57,7 @@ time_format: HH:mm:ss
 
 # Pagination
 ## Set per_page to 0 to disable pagination
-per_page: 10
+per_page: 1
 pagination_dir: page
 
 # Extensions
@@ -69,3 +69,8 @@ theme: hexo-theme-next
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type:
+
+# Social links
+social:
+  github: https://github.com/trainking
+  jianshu: http://www.jianshu.com/users/3074b798c7d0/latest_articles
