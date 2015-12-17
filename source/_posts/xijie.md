@@ -1,4 +1,6 @@
 title: JavaScript一些细节
+tags:
+    - Javascript
 ---
 # 删除数组中的元素
 
