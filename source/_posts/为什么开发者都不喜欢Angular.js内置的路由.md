@@ -20,7 +20,7 @@ tags:
 
 整体结构如下图所示：
 
-![应用结构图](http://upload-images.jianshu.io/upload_images/311153-cf44cd10702f8668.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![应用结构图](http://7xpgwr.com1.z0.glb.clouddn.com/311153-cf44cd10702f8668.jpg)
 
 大多数用例中，这些区块将同时显示在页面上。**Angular.js** 的内置路由***ngRoute***只允许一个视图（ng-view）出现在页面上。这样限制的情况下，人们可以使用包含页面（ng-include）或者 其他的变通方法为应用创建一个布局（layout）或主页（master page）。**UI-Router**支持多样化视图，并且每一个视图都有自己相应的控制，所以每个区块都是封装好，可以复用到整个应用程序需要的地方。
 
@@ -29,7 +29,7 @@ tags:
 常见的例子中，一个应用的嵌入式页面一般是主页的详情页面，更具体的说，就是列表的详情页面。许多应用程序，都有列表页面，点击其中一个列表元素，可以进入到列表的详情页面。更进一步说，你点击列表中一个行的连接，进入一个 **可查看** 详情页面或是一个 **可编辑** 的表单。
 
 如下图所示：
-![嵌入式视图示意图](http://upload-images.jianshu.io/upload_images/311153-380ffd07e591e1cb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![嵌入式视图示意图](http://7xpgwr.com1.z0.glb.clouddn.com/311153-380ffd07e591e1cb.jpg)
 
 如果列表页面和详情页面是单独分开的（或者他们被Angujar.js回调），使用**Angular.js**的内置路由***ngRoute*** 是非常容易完成的。然而，如果你想要保持列表不变，而详情页面出现在列表的右边或者下面，这样就变得非常具有挑战性了。
 
@@ -53,9 +53,9 @@ AngularJS的几个顾问包括Rob Eisenberg（Durandal.js 和Aurelia的创建�
 
 这个文档你可以点击右上方的绿色按钮，选择建议模式（suggesting）和查看模式（viewing），使页面更清晰。
 
-![建议模式](http://upload-images.jianshu.io/upload_images/311153-f6e886a8b9891708.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![建议模式](http://7xpgwr.com1.z0.glb.clouddn.com/311153-f6e886a8b9891708.png)
 
-![查看模式](http://upload-images.jianshu.io/upload_images/311153-ce7a50339dfd17ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![查看模式](http://7xpgwr.com1.z0.glb.clouddn.com/angularjs-router-design-document-2.png)
 
 ### 安装
 使用**UI-Router**，基于Angular.js 1.2.x或Angular.13.x，你可以通过以下一种方式获得其**JavaScript**源码:
@@ -93,10 +93,10 @@ AngularJS的几个顾问包括Rob Eisenberg（Durandal.js 和Aurelia的创建�
 
 ```
 var app = angular.module('demo', ['ui.router']);
- 
+
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
- 
+
     $stateProvider
         .state('home', {
             url:'/',
@@ -108,7 +108,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             templateUrl: 'templates/about.html',
             controller: 'AboutController'
         })
- 
+
 }]);
 ```
 
@@ -126,7 +126,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 下面例子展示的是，如果在一个控制器中重定向一个状态。
 ```
 $scope.redirectToAbout = function(){
-    $state.go('about'); 
+    $state.go('about');
 }
 ```
 
@@ -161,10 +161,10 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 
 ### UI-Router嵌入式视图案例
 **UI-Router**嵌入式视图的列表详情页面。这个例子显示的是一个电视节目的列表。
-![电视节目列表](http://upload-images.jianshu.io/upload_images/311153-b099aa3e5bcbf581.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![电视节目列表](http://7xpgwr.com1.z0.glb.clouddn.com/311153-b099aa3e5bcbf581.png)
 
 如果你点击其中一行，你可以看到这行的详情描述。
-![节目详情](http://upload-images.jianshu.io/upload_images/311153-a314b4205fa7c283.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![节目详情](http://7xpgwr.com1.z0.glb.clouddn.com/102.png)
 
 #### index.html
 AngularJS的应用程序是单页应用程序，视图是插入到shell页中的。这里就是我们的shell页——index.html:
@@ -175,18 +175,18 @@ AngularJS的应用程序是单页应用程序，视图是插入到shell页中的
         <meta charset="utf-8">
         <title>ui router demo</title>
         <style type="text/css">
-            .selected{background-color: #efefef; width:120px; } 
+            .selected{background-color: #efefef; width:120px; }
             .detail{width: 300px;margin: 30px;border-top: 1px solid #efefef;}
         </style>
         <!-- IE8-HTML5: https://code.google.com/p/html5shiv/ -->
         <script src="js/libs/html5shiv.js"></script>
- 
+
     </head>
     <body id="index">
- 
+
         <!-- Angular UI Router Directive for template insertion -->
         <div id="content" ui-view></div>
- 
+
         <script src="js/libs/angular.js"></script>
         <script src="js/libs/underscore.js"></script>
         <script src="js/libs/angular-ui-router.js"></script>        
@@ -204,7 +204,7 @@ AngularJS的应用程序是单页应用程序，视图是插入到shell页中的
         <a ui-sref="shows.detail({id: show.id})">{{show.name}}</a>
     </li>
 </ul>
- 
+
 <div class="detail" ui-view></div>
 ```
 正如前面所提到的，index.html中有一个`ui-view`属性指令，当相应的路由被请求时，视图（shows.html）则会渲染在这个`div`中。
@@ -248,7 +248,7 @@ app.controller('ShowsDetailController', ['$scope','$stateParams', 'ShowsService'
 ```
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/shows');
- 
+
     $stateProvider
         .state('shows', {
             url:'/shows',
@@ -300,11 +300,11 @@ app.factory('ShowsService',function(){
     },
     {
         id: 3,
-        name: '7D', 
+        name: '7D',
         description: 'The 7D is an American animated television series produced by Disney Television Animation, and broadcast on Disney XD starting in July 7, 2014. It is a re-imagining of the titular characters from the 1937 film Snow White and the Seven Dwarfs by Walt Disney Productions'
     }];
- 
- 
+
+
     return {
         list: function(){
             return shows;
@@ -319,11 +319,11 @@ app.factory('ShowsService',function(){
 ### UI-Router多样化视图案例
 下面这个例子有多个区块在一个页面，有`header`，`content`，`footer `。它们被**UI-Router**用多样化视图所管理。
 
-![多样化视图案例](http://upload-images.jianshu.io/upload_images/311153-aa38ccb4105bd258.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![多样化视图案例](http://7xpgwr.com1.z0.glb.clouddn.com/103.png)
 
 这是一些主导航，和在这个应用中根据用户导航填充的各式各样的虚拟页。
 
-![子页](http://upload-images.jianshu.io/upload_images/311153-e467654500487595.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![子页](http://7xpgwr.com1.z0.glb.clouddn.com/104.png)
 
 #### index.html
 ```
@@ -335,19 +335,19 @@ app.factory('ShowsService',function(){
         <title>Index</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
- 
- 
+
+
     </head>
     <body ng-app="demo">
- 
+
        <div ui-view="header"></div>
        <div ui-view="content"></div>
        <div ui-view="footer"></div>
- 
+
     <script src="/js/bower_components/angular/angular.js"></script>
     <script src="/js/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/js/main.js"></script>
- 
+
     </body>
 </html>
 ```
@@ -414,7 +414,7 @@ app.factory('ShowsService',function(){
             },
             'content': {
                 templateUrl: '/templates/partials/content.html',
-                controller: 'ContentController' 
+                controller: 'ContentController'
             },
             'footer': {
                 templateUrl: '/templates/partials/footer.html',
@@ -428,11 +428,11 @@ app.factory('ShowsService',function(){
 
 ```
 var app = angular.module('demo', ['ui.router']);
- 
+
 app.config(function($stateProvider, $urlRouterProvider){
- 
+
     $urlRouterProvider.otherwise('/');
- 
+
     $stateProvider
     .state('home',{
         url: '/',
@@ -441,14 +441,14 @@ app.config(function($stateProvider, $urlRouterProvider){
                 templateUrl: '/templates/partials/header.html'
             },
             'content': {
-                templateUrl: '/templates/partials/content.html' 
+                templateUrl: '/templates/partials/content.html'
             },
             'footer': {
                 templateUrl: '/templates/partials/footer.html'
             }
         }
     })
- 
+
     .state('dashboard', {
         url: '/dashboard',
         views: {
@@ -460,9 +460,9 @@ app.config(function($stateProvider, $urlRouterProvider){
                 controller: 'DashboardController'
             }
         }
- 
+
     })
- 
+
     .state('campaigns', {
         url: '/campaigns',
         views: {
@@ -474,7 +474,7 @@ app.config(function($stateProvider, $urlRouterProvider){
                 templateUrl: '/templates/partials/footer.html'
             }
         }
- 
+
     })
 });
 ```
@@ -489,11 +489,11 @@ app.config(function($stateProvider, $urlRouterProvider){
 
 ```
 var app = angular.module('demo', ['ui.router']);
- 
+
 app.config(function($stateProvider, $urlRouterProvider){
- 
+
     $urlRouterProvider.otherwise('/');
- 
+
     $stateProvider
     .state('app',{
         url: '/',
@@ -502,14 +502,14 @@ app.config(function($stateProvider, $urlRouterProvider){
                 templateUrl: '/templates/partials/header.html'
             },
             'content': {
-                templateUrl: '/templates/partials/content.html' 
+                templateUrl: '/templates/partials/content.html'
             },
             'footer': {
                 templateUrl: '/templates/partials/footer.html'
             }
         }
     })
- 
+
     .state('app.dashboard', {
         url: 'dashboard',
         views: {
@@ -518,9 +518,9 @@ app.config(function($stateProvider, $urlRouterProvider){
                 controller: 'DashboardController'
             }
         }
- 
+
     })
- 
+
     .state('app.campaigns', {
         url: 'campaigns',
         views: {
@@ -529,9 +529,9 @@ app.config(function($stateProvider, $urlRouterProvider){
                 controller: 'CampaignController'
             }
         }
- 
+
     })
- 
+
     .state('app.subscribers', {
         url: 'subscribers',
         views: {
@@ -540,7 +540,7 @@ app.config(function($stateProvider, $urlRouterProvider){
                 controller: 'SubscriberController'      
             }
         }
- 
+
     })
     .state('app.subscribers.detail', {
         url: '/:id',
@@ -548,16 +548,16 @@ app.config(function($stateProvider, $urlRouterProvider){
         templateUrl: 'templates/partials/subscriber-detail.html',
         controller: 'SubscriberDetailController'
         */
- 
+
         views: {
             'detail@app.subscribers': {
                 templateUrl: 'templates/partials/subscriber-detail.html',
                 controller: 'SubscriberDetailController'        
             }
         }
- 
+
     });
- 
+
 });
 ```
 
@@ -606,15 +606,15 @@ Header的更新，是通过`ui-sref`引用嵌入的状态。如`.campaigns`不�
 ##### partials/subscribers.html
 ```
 <h2>Subscribers</h2>
- 
+
 <ul>
     <li ng-repeat="subscriber in subscribers">
- 
+
         <a ui-sref=".detail({id: subscriber.id})" > {{subscriber.name}}</a>
         {{subscriber.email}}
     </li>
 </ul>
- 
+
 <div ui-view="detail"></div>
 ```
 
