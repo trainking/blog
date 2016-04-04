@@ -2,13 +2,16 @@
 <body>
   <div id="container">
     <div id="wrap">
+      <!-- 头部导航条 -->
       <%- partial('_partial/header', null, {cache: !config.relative_link}) %>
       <div class="outer">
         <section id="main"><%- body %></section>
+        <!--侧边栏-->
         <% if (theme.sidebar && theme.sidebar !== 'bottom'){ %>
           <%- partial('_partial/sidebar', null, {cache: !config.relative_link}) %>
         <% } %>
       </div>
+      <!--底部栏-->
       <%- partial('_partial/footer', null, {cache: !config.relative_link}) %>
     </div>
     <%- partial('_partial/mobile-nav', null, {cache: !config.relative_link}) %>
