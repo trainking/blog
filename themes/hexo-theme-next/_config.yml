@@ -233,6 +233,3 @@ images: images
 # Theme version
 version: 0.4.5.2
 
-auto_excerpt:
-  enable: true
-  length: 150
