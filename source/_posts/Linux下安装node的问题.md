@@ -37,7 +37,7 @@ at Function.Module._load (module.js:312:12)
 
 仔细查阅了`npm`在github上的issue,原来提供了一个脚本将`npm`必须的东西安装:
 ```
-curl https://npmjs.org/install.sh | sudo sh
+curl -0 -L http://npmjs.org/install.sh | sudo sh
 ```
 
 ## 总结
