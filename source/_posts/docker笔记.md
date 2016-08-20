@@ -42,3 +42,56 @@ Cannot connect to the Docker daemon. Is the docker daemon running on this host?
 ```
 sudo service docker start
 ```
+
+## 0x01 镜像
+
+**镜像** 是docker的可读层,可以看做是一个虚拟机的系统.docker的Docker Hub
+
+获取镜像:
+```
+sudo docker pull REPOSITORY[:TAG]
+```
+
+搜索镜像:
+```
+sudo docker search REPOSITORY[:TAG]
+```
+
+查看镜像:
+```
+sudo docker images
+```
+输出:
+```
+fry@fry-linux-mint blog $ sudo docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+test                latest              c96ffd3bfa54        14 minutes ago      126.4 MB
+ubuntu              latest              f8d79ba03c00        8 days ago          126.4 MB
+```
+**IMAGE ID** 是一个镜像的唯一标识,**REPOSITORY** 是来源仓库,例如上图中的第二,是从ubuntu
+仓库中pull下来的,第一个则是我自己根据`ununtu`新建的,所以你看到二者的 **SIZE** 是一样大
+小的. **TAG** 是镜像的标签,通过 `REPOSITORY[:TAG]` 的形式,也可定位一个指定的镜像.但是,
+这种形式与镜像是一个多对一的关系,如下:
+```
+ubuntu              14.04               f8d79ba03c00        8 days ago          126.4 MB
+ubuntu              latest              f8d79ba03c00        8 days ago          126.4 MB
+```
+我将`ubuntu:latest`添加了一个标签`14.04`,这两个标签的ID是一样的,说明他们的指向的是同一
+个镜像.我们可以通过下面的命令,做到这点:
+```
+sudo docker tag ubuntu:latest ubuntu:14.04
+```
+
+创建镜像,创建镜像有三种方式:
+1. 基于已有镜像的容器创建
+```
+docker commit -m "提交信息" -a "创建者信息" 镜像id REPOSITORY[:TAG]
+```
+2. 基于本地模板导入
+```
+docker import
+```
+3. 基于Dockerfile创建
+这个最灵活最受欢迎的方式.
+
+## 0x02 容器
