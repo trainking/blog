@@ -137,3 +137,14 @@ $ docker rm [NAMMES][CONTAINER ID]
 ```
 
 这里要注意的是,上面我们用`docker rmi`命令删除镜像时,会发现出现删不了的情况.这是因为如果镜像如果有了容器,是不能删除的.要先删除容器,在能再删除此镜像.
+
+### 端口映射
+示例:
+将mysql容器的3306端口映射到本机的3306端口.
+```
+$ docker run --name myapp-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=os33449 -d mysql:latest
+```
+端口映射是为了可以让非docker应用访问,docker容器可以通过`--link`来连接服务
+```
+$ docker run --name some-app --link some-mysql:mysql -d application-that-uses-mysql
+```
