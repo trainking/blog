@@ -43,6 +43,12 @@ Cannot connect to the Docker daemon. Is the docker daemon running on this host?
 sudo service docker start
 ```
 
+安装之后,你会发现你无法使用普通用户权限来使用docker.必须使用root权限,这是因为容器会修改系统
+的核心内容.存在不可控的风险,所以必须要是用root用户权限,来保证安全.但为了更好的使用,docker
+推荐大家建立一个名叫`docker`的分组,安装之后就会有,如果没有,请创建之.
+
+然后在将你要加入的用户加入到该分组就可以了.
+
 ## 0x01 镜像
 
 **镜像** 是docker的可读层,可以看做是一个虚拟机的系统.docker的Docker Hub
@@ -95,3 +101,39 @@ docker import
 这个最灵活最受欢迎的方式.
 
 ## 0x02 容器
+容器可以看作是镜像的一个状态,当使用`docker run`操作一个镜像,就是启动一个容器.
+
+### 查看容器
+```
+fry@fry-linux-mint ~ $ docker ps
+CONTAINER ID        IMAGE                                 COMMAND                  CREATED             STATUS              PORTS                         NAMES
+0b0a36e6fc74        dylanlindgren/docker-laravel-nginx    "/opt/bin/nginx-start"   3 hours ago         Up 3 hours          0.0.0.0:80->80/tcp, 443/tcp   myapp-web
+be238193f975        dylanlindgren/docker-laravel-phpfpm   "/usr/sbin/php5-fpm -"   3 hours ago         Up 3 hours          9000/tcp                      myapp-php
+```
+
+`docker ps`命令查看正在运行状态的容器,注意看`STATUS`项,而加上`-a`参数,就可以查看全部容器.
+
+```
+fry@fry-linux-mint ~ $ docker ps -a
+CONTAINER ID        IMAGE                                 COMMAND                  CREATED             STATUS                   PORTS                         NAMES
+d373862c22a0        dylanlindgren/docker-laravel-data     "true"                   3 hours ago         Exited (0) 3 hours ago                                 myapp-data
+0b0a36e6fc74        dylanlindgren/docker-laravel-nginx    "/opt/bin/nginx-start"   3 hours ago         Up 3 hours               0.0.0.0:80->80/tcp, 443/tcp   myapp-web
+be238193f975        dylanlindgren/docker-laravel-phpfpm   "/usr/sbin/php5-fpm -"   3 hours ago         Up 3 hours               9000/tcp                      myapp-php
+```
+
+### 启动容器
+```
+$ docker start [NAMMES][CONTAINER ID]
+```
+
+### 关闭容器
+```
+$ docker stop [NAMMES][CONTAINER ID]
+```
+
+### 删除容器
+```
+$ docker rm [NAMMES][CONTAINER ID]
+```
+
+这里要注意的是,上面我们用`docker rmi`命令删除镜像时,会发现出现删不了的情况.这是因为如果镜像如果有了容器,是不能删除的.要先删除容器,在能再删除此镜像.
