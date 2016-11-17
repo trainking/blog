@@ -59,7 +59,7 @@ tags:
 
 ## 修改配置文件后，找不到php文件的问题
 
-修改
+修改`nginx.conf`:
 ```
 fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
 ```
