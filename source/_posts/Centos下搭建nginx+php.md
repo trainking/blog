@@ -63,3 +63,13 @@ tags:
 ```
 fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
 ```
+
+## 找不到php.ini的情况
+从源码中复制一份到php安装目录的`lib/`下：
+
+```
+cp php.ini-development /usr/local/php7/lib/php.ini
+```
+
+> 注意：
+如果要修改php.ini的加载路径，可以在php编译时加上`--with-config-file-path=/usr/local/php/etc`配置
