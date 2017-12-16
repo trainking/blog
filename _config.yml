@@ -3,10 +3,10 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: yield编程实验室
-subtitle: 打怪，升级，收小弟，拓后宫
-description: 唯爱与美食不可辜负
-author: yield
+title: Cannon
+subtitle: 一口咖啡一口茶
+description: 云无心以出岫，鸟倦飞而知还
+author: Cannon
 language: zh-Hans
 timezone: Asia/Shanghai
 
@@ -73,7 +73,6 @@ deploy:
 # Social links
 social:
   github: https://github.com/trainking
-  简书: http://www.jianshu.com/users/3074b798c7d0/latest_articles
   个人简历: http://yieldblog.me/resume.html
 
 
