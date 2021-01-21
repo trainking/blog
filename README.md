@@ -25,6 +25,7 @@
 ### 2.2 Golang相关
 
 * [反射笔记](golang/反射笔记.md)
+* [EffectiveGo](golang/EffectiveGo.md)
 
 ## 3. 补充
 
