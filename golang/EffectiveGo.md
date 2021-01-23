@@ -1,6 +1,6 @@
 # Effective Go
 
-----
+---
 
 - [Effective Go](#effective-go)
   - [概述](#概述)
