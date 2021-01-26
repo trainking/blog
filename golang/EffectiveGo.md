@@ -20,7 +20,7 @@
     - [Getters/Setters](#getterssetters)
     - [文件命名](#文件命名)
   - [代码结构](#代码结构)
-    - [分号](#分号)
+    - [分号与逗号](#分号与逗号)
     - [控制结构](#控制结构)
       - [if](#if)
       - [for](#for)
@@ -188,11 +188,149 @@ if owner != user {
 
 ## 代码结构
 
-### 分号
+### 分号与逗号
+
+`Golang`的每行不需要使用`;`号作为每一行的结束，但，当一行多表达式时：
+
+```go
+if err := fn(); err != nil {
+  ...
+}
+```
+
+需要使用`;`进行间隔。
+
+`,`在结构体赋值，`map`，`slice`等进行多行赋值时，需要使用，且最后一个也需要：
+
+```go
+var a map[string]string = map[string]string{
+  "hello": "aaa",
+}
+```
+
+而只有一行时，最后一个元素则不需要:
+
+```go
+var a map[string]string = map[string]string{"hello": "aaa"}
+```
+
+因为，`Golang`使用换行作为代码结束，**本质上，逗号和分号是用来解决歧义使用的！**
+
 ### 控制结构
+
 #### if
+
+`if`的基本结构是:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+    if 7%2 == 0 {
+        fmt.Println("7 is even")
+    } else {
+        fmt.Println("7 is odd")
+    }
+
+    if 8%4 == 0 {
+        fmt.Println("8 is divisible by 4")
+    }
+
+    if num := 9; num < 0 {
+        fmt.Println(num, "is negative")
+    } else if num < 10 {
+        fmt.Println(num, "has 1 digit")
+    } else {
+        fmt.Println(num, "has multiple digits")
+    }
+}
+```
+
+* 判断条件**condition**不需要使用`()`包裹，只需要使用空格分隔
+* 在`if`中使用`:=`赋值的变量，**仅此结构块中有效**
+
 #### for
+
+`for`的基本结构:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+    i := 1
+    for i <= 3 {
+        fmt.Println(i)
+        i = i + 1
+    }
+
+    for j := 7; j <= 9; j++ {
+        fmt.Println(j)
+    }
+
+    for {
+        fmt.Println("loop")
+        break
+    }
+
+    for n := 0; n <= 5; n++ {
+        if n%2 == 0 {
+            continue
+        }
+        fmt.Println(n)
+    }
+}
+```
+
+`for`还可以结合`range`结构，用来遍历可迭代结构，例如map和切片:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+    nums := []int{2, 3, 4}
+    sum := 0
+    for _, num := range nums {
+        sum += num
+    }
+    fmt.Println("sum:", sum)
+
+    for i, num := range nums {
+        if num == 3 {
+            fmt.Println("index:", i)
+        }
+    }
+
+    kvs := map[string]string{"a": "apple", "b": "banana"}
+    for k, v := range kvs {
+        fmt.Printf("%s -> %s\n", k, v)
+    }
+
+    for k := range kvs {
+        fmt.Println("key:", k)
+    }
+
+    for i, c := range "go" {
+        fmt.Println(i, c)
+    }
+}
+```
+
+> 遍历数组或切片时，第一个返回是下标，第二返回是值
+> 遍历map时，第一个返回是key，第二个返回是Vale
+
 #### switch
+
+
+
 #### select
 
 ## 函数
