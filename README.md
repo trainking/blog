@@ -7,6 +7,7 @@
   - [2. 笔记](#2-笔记)
     - [2.1 Python相关](#21-python相关)
     - [2.2 Golang相关](#22-golang相关)
+    - [2.3 Nginx相关](#23-nginx相关)
   - [3. 补充](#3-补充)
   - [4. 声明](#4-声明)
 
@@ -26,6 +27,10 @@
 
 * [反射笔记](golang/反射笔记.md)
 * [EffectiveGo](golang/EffectiveGo.md)
+
+### 2.3 Nginx相关
+
+* [nginx编译安装](nginx/nginx编译安装.md)
 
 ## 3. 补充
 
