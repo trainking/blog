@@ -31,6 +31,9 @@
     - [多返回值](#多返回值)
     - [命名返回值](#命名返回值)
     - [Defer](#defer)
+  - [数据结构](#数据结构)
+    - [new](#new)
+    - [make](#make)
   - [附录](#附录)
     - [运算符优先级](#运算符优先级)
 
@@ -418,10 +421,106 @@ func main() {
 
 ## 函数
 
+`Golang`函数是一种独特的设计，他允许`动态参数`和`多个返回值`，同时在包中也受**大小写**访问约束。
+
 ### 动态参数
+
+定义一个具有动态参数的函数：
+
+```go
+func (file *File) Write(b ...byte) (n int, err error)
+```
+
+在函数内部使用时，**动态参数**是以一个切片接收，且**动态参数**必须是最后一个参数。
+
 ### 多返回值
+
+定义一个多返回值函数:
+
+```
+func (file *File) Write(b []byte) (n int, err error)
+```
+
+多返回值，意味着，接收函数结果必须要有多个变量，不用结果可以用`_`忽略。
+
 ### 命名返回值
+
+当一个函数的返回值被声明：
+
+```go
+func (file *File) Write(b []byte) (n int, err error)
+```
+
+以为在函数体中，不用在声明两个函数，同时在函数中`return`不带任何值时，默认返回这两个变量
+
+```go
+
+func Test() (n int, err error) {
+    ...
+    return
+}
+```
+
 ### Defer
+
+`Defer`是Golang函数不使用`try-catch-finally`机制的一种补偿机制，`Defer`之后的代码，在函数退出前执行，用于释放资源这样的共有操作：
+
+```go
+func Contents(filename string) (string, error) {
+    f, err := os.Open(filename)
+    if err != nil {
+        return "", err
+    }
+    defer f.Close()  // f.Close will run when we're finished.
+
+    var result []byte
+    buf := make([]byte, 100)
+    for {
+        n, err := f.Read(buf[0:])
+        result = append(result, buf[0:n]...) // append is discussed later.
+        if err != nil {
+            if err == io.EOF {
+                break
+            }
+            return "", err  // f will be closed if we return here.
+        }
+    }
+    return string(result), nil // f will be closed if we return here.
+}
+```
+
+需要注意的是，`Defer`可以执行多个函数，但是他是以**LIFO**(后入先出)的方式执行：
+
+```go
+for i := 0; i < 5; i++ {
+    defer fmt.Printf("%d ", i)
+}
+```
+
+上面代码是输出结果是`4 3 2 1 0`。
+
+多个`Defer`也是这样：
+
+```go
+func main() {
+	// for i := 0; i < 5; i++ {
+	// 	defer fmt.Println(i)
+	// }
+	defer fmt.Println(1)
+	defer fmt.Println(2)
+    defer fmt.Println(3)
+    
+    // out : 3 2 1
+}
+```
+说明，本质上`Defer`是将延后执行代码，加入到一个`栈`中，在函数结束时，调用此栈。
+
+## 数据结构
+
+### new
+
+### make
+
 
 ## 附录
 
