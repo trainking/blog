@@ -43,6 +43,11 @@
     - [常量](#常量)
     - [变量](#变量)
     - [init函数](#init函数)
+  - [interface](#interface)
+    - [interface{}](#interface-1)
+  - [struct](#struct)
+    - [struct{}](#struct-1)
+  - [方法](#方法)
   - [附录](#附录)
     - [运算符优先级](#运算符优先级)
 
@@ -686,6 +691,130 @@ var H = "hello"
 * 一个包中可以使用定义多个**init函数**
 * 多个**init函数**随机执行，不要依赖他们的顺序
 * **init函数**在所有包变量初始化后才执行
+
+## interface
+
+`interface`是**Golang**的接口定义，接口是用来抽象化，向外提供的方法，隐藏实现的细节：
+
+```go
+type (
+
+	// Hauthorized_OP 验证操作
+	Hauthorized_OP interface {
+
+		// 继承公有接口
+		Repository
+
+		// Save 保存数据
+		Save(username, t string) error
+
+		// Check 检查
+		Check(t string) bool
+	}
+
+	hauthorized_op struct {
+		collection *mongo.Collection
+	}
+)
+```
+
+接口实现之间是通过隐式实现，不需要专门关键字声明，只需要实现了方法，就是这个接口的实现，这是**鸭子类型**的特性：
+
+```go
+func NewHauthorizedOP() (Hauthorized_OP, error) {
+    ...
+    return &hauthorized_op{
+		collection: collection,
+	}, nil
+}
+
+```
+
+### interface{}
+
+`interface{}`是一个特殊的接口类型，它代表**鸭子类型**的终极，因为这个接口类型，没有定义任何需要实现的方法，所以，它可以接收任何值，作为无泛型的一种补充，比如经常用的一个map:
+
+```go
+var m map[string]interface{}
+```
+
+## struct
+
+`struct`是声明结构体的关键字，结构体是最重要的特性，接口可以靠它来实现，业务可以靠它来组织：
+
+```go
+type A struct {
+    B int
+    C interface{}
+    d string
+}
+```
+
+也可以声明一个匿名结构体:
+
+```go
+var p struct {
+    B int
+    C interface{}
+    d string
+}
+```
+
+**结构体成员和方法依旧遵循大小写访问限制**。
+
+### struct{}
+
+`Golang`的最大特点，就是对类型的0值都做了特殊的处理，而`struct{}`也不例外。`struct{}`从字面上看，是一个没有任何成员的结构体，它常常用来做节省内存使用，例如：
+
+```go
+package main
+
+import (
+	"fmt"
+	"unsafe"
+)
+
+func main() {
+	var a struct {
+		c int64
+		f struct{}
+	}
+
+	var b struct {
+		f struct{}
+		c int64
+	}
+	fmt.Println(unsafe.Sizeof(a))
+	fmt.Println(unsafe.Sizeof(b))
+}
+// out: 16 8
+```
+
+这段代码中，当`struct{}`作为第一个成员时，它并不占内存，说明`Golang`对此做了特殊处理
+
+## 方法
+
+可以为任何命名类型指定方法，如：
+
+```go
+type ByteSlice []byte
+
+func (slice ByteSlice) Append(data []byte) []byte {
+    // Body exactly the same as the Append function defined above.
+}
+```
+
+同时，也可以使用类型的指针作为接受方(receiver):
+
+```go
+func (p *ByteSlice) Append(data []byte) {
+    slice := *p
+    // Body as above, without the return.
+    *p = slice
+}
+```
+
+这二者的区别是，**可以使用指针和值调用值方法，但是只能使用指针调用指针方法**，所以一般情况下，多使用指针来调用
 
 ## 附录
 
