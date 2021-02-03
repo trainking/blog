@@ -45,6 +45,7 @@
     - [init函数](#init函数)
   - [interface](#interface)
     - [interface{}](#interface-1)
+    - [interface check](#interface-check)
   - [struct](#struct)
     - [struct{}](#struct-1)
   - [方法](#方法)
@@ -736,6 +737,16 @@ func NewHauthorizedOP() (Hauthorized_OP, error) {
 
 ```go
 var m map[string]interface{}
+```
+
+### interface check
+
+接口变量可以通过向下强制转型，判断是否是该类型：
+
+```go
+if _, ok := val.(json.Marshaler); ok {
+    fmt.Printf("value %v of type %T implements json.Marshaler\n", val, val)
+}
 ```
 
 ## struct
