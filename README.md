@@ -27,6 +27,7 @@
 
 * [反射笔记](golang/反射笔记.md)
 * [EffectiveGo](golang/EffectiveGo.md)
+* [进阶笔记](golang/进阶笔记.md)
 
 ### 2.3 Nginx相关
 
